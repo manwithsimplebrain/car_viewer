@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "Bash(flutter pub get)",
+      "Bash(curl -L -o /Users/macbook/development/flutter/practices/car_viewer/assets/panorama.jpg \"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Pano_Louvre.jpg/1280px-Pano_Louvre.jpg\")",
+      "Bash(curl -L -o /Users/macbook/development/flutter/practices/car_viewer/assets/panorama.jpg \"https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=2048&q=80\")",
+      "Bash(flutter analyze)",
+      "Bash(flutter pub add image_360_viewer)",
+      "Bash(flutter pub add cached_network_image)"
+    ]
+  }
+}
