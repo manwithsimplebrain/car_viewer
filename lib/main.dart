@@ -101,6 +101,8 @@ class _CarViewer360State extends State<CarViewer360>
     with SingleTickerProviderStateMixin {
   static const int _totalFrames = 72;
   static const double _pixelsPerFrame = 4.0;
+  static const double _qualityRatio = 0.7;
+
 
   final List<String> _imageUrls = List.generate(
     _totalFrames,
@@ -176,13 +178,14 @@ class _CarViewer360State extends State<CarViewer360>
 
     ImageProvider provider;
     if (widget.useResize) {
-      final screenWidth = WidgetsBinding
-              .instance.platformDispatcher.views.first.physicalSize.width /
-          WidgetsBinding
-              .instance.platformDispatcher.views.first.devicePixelRatio;
+      // Use physical pixels (logical * devicePixelRatio) for retina sharpness
+      // e.g. iPhone: 390 logical * 3x = 1170 physical pixels
+      // Still much smaller than source image if source > 1170px
+      final view = WidgetsBinding.instance.platformDispatcher.views.first;
+      final targetWidth = (view.physicalSize.width * _qualityRatio).toInt();
       provider = ResizeImage(
         NetworkImage(_imageUrls[index]),
-        width: screenWidth.toInt(),
+        width: targetWidth,
         allowUpscaling: false,
       );
     } else {
